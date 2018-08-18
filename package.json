@@ -1,8 +1,11 @@
 {
-  "name": "PM2-Telegram-bot",
+  "name": "pm2-telegram-bot",
   "version": "1.0.0",
-  "description": "Bot to control PM with Telegram",
+  "description": "Telegram bot for PM2",
   "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MrMarble/PM2-Telegram-bot.git"
