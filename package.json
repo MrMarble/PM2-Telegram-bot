@@ -1,0 +1,23 @@
+{
+  "name": "pm2-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for PM2",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrMarble/PM2-Telegram-bot.git"
+  },
+  "author": "MrMarble",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrMarble/PM2-Telegram-bot/issues"
+  },
+  "homepage": "https://github.com/MrMarble/PM2-Telegram-bot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.30.0",
+    "pm2": "^3.0.3"
+  }
+}
