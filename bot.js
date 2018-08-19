@@ -3,12 +3,28 @@ const pm2 = require('pm2');
 
 const TOKEN = process.env.TOKEN || "<DEFAULT TOKEN>";
 const bot = new TelegramBot(TOKEN, {
-  polling: true
+  polling: {
+    autoStart: false,
+  }
 });
+
+bot.getUpdates().then((updates) => {
+  if (updates[0] !== undefined) {
+    if (updates[0].message.text.includes('/restart')) {
+      bot.getUpdates({
+        timeout: 1,
+        limit: 0,
+        offset: updates[0].update_id + 1
+      });
+    }
+  }
+});
+bot.stopPolling();
+bot.startPolling();
 
 bot.on('message', generalCallback);
 bot.onText(/\/list|ls/, commandListCallback);
-// bot.onText(/\/restart (\d+)|(\D+)/, commandRestartCallback);
+bot.onText(/\/restart (.+)/, commandRestartCallback);
 // bot.onText(/logs? (\d+)|(.+) (\d)/, commandLogCallback);
 // bot.onText(/monit (\d+)|(.+)/, commandMonitCallback);
 
@@ -33,7 +49,7 @@ function commandListCallback(msg, match) {
   pm2.list(function(err, list) {
     let response = '';
     if (err) {
-      error(err, chat_id);
+      error(err);
     }
     for (let proc of list) {
       response += `<b>${proc.name}</b> ${status[proc.pm2_env.status] || ''}` +
@@ -50,6 +66,16 @@ function commandListCallback(msg, match) {
       console.error(error.code);
       console.error(error.response.body);
     });
+  });
+}
+
+function commandRestartCallback(msg, match) {
+  const chat_id = msg.chat.id;
+  let proc = match[1];
+  pm2.restart(proc, function(err, pr) {
+    if (err) {
+      error(err);
+    }
   });
 }
 
@@ -72,13 +98,13 @@ function time_since(timestamp) {
   return str;
 }
 
-function error(error, chat_id) {
-  console.error(err);
-  if (chat_id !== undefined) {
-    bot.sendMessage(chat_id, `<pre>${err}</pre>`, {
-      parse_mode: 'html'
-    });
-  }
+function error(error) {
+  bot.stopPolling();
+  bot.getUpdates({
+    timeout: 1,
+    limit: 0,
+    offset: bot._polling.options.params.offset
+  });
+  console.error(error);
   pm2.disconnect();
-  process.exit(2);
 }
