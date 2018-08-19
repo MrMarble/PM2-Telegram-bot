@@ -97,8 +97,8 @@ function time_since(timestamp) {
     str = `${minutes}m ${seconds}s`;
   }
   if (minutes > 60) {
-    minutes = Math.abs(Math.round(diff % 24));
-    hours = Math.abs(Math.round(diff / 24));
+    minutes = Math.abs(Math.round(diff % 60));
+    hours = Math.abs(Math.round(diff / 60));
     str = `${hours}h ${minutes}m`;
   }
   return str;
