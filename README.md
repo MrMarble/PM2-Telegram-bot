@@ -18,7 +18,10 @@
 For now there are only two commands available, list and restart.
 
 ### /list, /ls
-  List all the processes that pm2 is managing ![](assets/markdown-img-paste-20180819124409749.png) ![](assets/markdown-img-paste-20180819124449325.png)
+  List all the processes that pm2 is managing 
+  
+  ![](assets/markdown-img-paste-20180819124409749.png) ![](assets/markdown-img-paste-20180819124449325.png)
 ### /restart
 Let you restart or start a process by the name or the id, you can also use `all` to restart all the proccesses.
+
 ![](assets/markdown-img-paste-2018081912521625.png)
