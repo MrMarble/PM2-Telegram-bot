@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const pm2 = require('pm2');
 
-const TOKEN = process.env.TOKEN || "<DEFAULT TOKEN>";
+const TOKEN = process.env.TOKEN || "YOUR TOKEN HERE";
 const bot = new TelegramBot(TOKEN, {
   polling: {
     autoStart: false,
@@ -16,6 +16,7 @@ bot.getUpdates().then((updates) => {
         limit: 0,
         offset: updates[0].update_id + 1
       });
+      bot.sendMessage(updates[0].message.chat.id, 'Process restarted');
     }
   }
 });
@@ -75,6 +76,11 @@ function commandRestartCallback(msg, match) {
   pm2.restart(proc, function(err, pr) {
     if (err) {
       error(err);
+    }
+    for (let proc of pr) {
+      bot.sendMessage(chat_id, `Process <i>${proc.name}</i> has been restarted`, {
+        parse_mode: 'html'
+      });
     }
   });
 }
