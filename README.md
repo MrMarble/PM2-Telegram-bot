@@ -1,4 +1,7 @@
 # PM2-Telegram-bot
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/MrMarble/PM2-Telegram-bot.svg)](https://greenkeeper.io/)
+
   This bot let you control [PM2](https://pm2.io/doc/) with Telegram
 
 ## How to install
