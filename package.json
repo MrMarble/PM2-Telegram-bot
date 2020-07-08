@@ -19,5 +19,8 @@
   "dependencies": {
     "node-telegram-bot-api": "^0.50.0",
     "pm2": "^4.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.5.25"
   }
 }
