@@ -3,11 +3,11 @@
 
 ## How to install
 1. Clone the repository in the same computer/server where pm2 is running
-2. Run `npm install` in the same directory as the project files to install all the dependencies
+2. Run `npm install` in the same directory as the project files to install all the dependencies then run `npm run build`
 3. you have two options to run the bot:
-  1. Open `bot.js` and add the telegram token that [@botFather](https://t.me/BotFather) gave you and then run `node bot.js`:
-  ```javascript
-  const TOKEN = process.env.TOKEN || "YOUR TOKEN HERE";
+  1. Set the token that [@botFather](https://t.me/BotFather) gave you as an environment variable and then run `node bot.js`:
+  ```bash
+  TOKEN=SuPeRfAlSeToKeN pm2 start ./dist/app.js
   ```
   2. Open `config.json` and add the telegram token that [@botFather](https://t.me/BotFather) gave you and then run `pm2 start config.json`:
 ```json
